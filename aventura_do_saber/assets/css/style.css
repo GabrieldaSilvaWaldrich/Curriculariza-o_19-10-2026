@@ -1,0 +1,134 @@
+/* ==========================================================================
+   Aventura do Saber - Estilos personalizados (complementam o Tailwind CSS)
+   ========================================================================== */
+
+/* ========================================================================== */
+/* 1. ESTILOS GERAIS E COMPONENTES BASE                                       */
+/* ========================================================================== */
+* {
+    font-family: 'Fredoka', 'Nunito', sans-serif;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+body {
+    background-color: #121212;
+}
+
+/* Card Base do Jogo */
+.game-card {
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    border-radius: 2rem;
+}
+
+/* Botão Vermelho estilo Pílula */
+.btn-red-pill {
+    background-color: #e53935;
+    color: white;
+    transition: all 0.2s ease;
+    box-shadow: 0 6px 0px #b71c1c;
+}
+.btn-red-pill:hover {
+    transform: translateY(-2px);
+    background-color: #ef5350;
+    box-shadow: 0 8px 0px #b71c1c;
+}
+.btn-red-pill:active {
+    transform: translateY(4px);
+    box-shadow: 0 2px 0px #b71c1c;
+}
+
+/* Imagens de Opção e Mídia */
+.option-img {
+    object-fit: contain;
+    pointer-events: none;
+}
+
+/* Animações Suaves */
+@keyframes bounce-gentle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+.bounce-anim {
+    animation: bounce-gentle 2s infinite ease-in-out;
+}
+
+/* ========================================================================== */
+/* 2. PÁGINAS DE COMEÇO E FIM (FUNDO ALARANJADO)                              */
+/* ========================================================================== */
+.bg-orange-warm {
+    background: linear-gradient(135deg, #e64a19 0%, #ff7043 50%, #ff8a65 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.custom-input {
+    background-color: #f5f5f5;
+    border: 2px solid #e0e0e0;
+    border-radius: 9999px;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+    text-align: center;
+    font-weight: 600;
+    color: #555;
+    width: 100%;
+    outline: none;
+    transition: all 0.2s ease;
+}
+.custom-input:focus {
+    border-color: #ef5350;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(239, 83, 80, 0.2);
+}
+.custom-input::placeholder {
+    color: #aaa;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+}
+
+/* ========================================================================== */
+/* 3. PÁGINAS INTERMEDIÁRIAS (FUNDO CLARO / PASTEL)                            */
+/* ========================================================================== */
+.bg-pastel-clear {
+    background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 40%, #e0c3fc 70%, #8ec5fc 100%);
+}
+
+.btn-blue-level {
+    background-color: #42a5f5;
+    box-shadow: 0 5px 0px #1e88e5;
+    color: white;
+}
+.btn-yellow-level {
+    background-color: #ffca28;
+    box-shadow: 0 5px 0px #f57f17;
+    color: #333;
+}
+.btn-purple-level {
+    background-color: #ab47bc;
+    box-shadow: 0 5px 0px #7b1fa2;
+    color: white;
+}
+
+.grid-card-option {
+    border: 3px solid #e0e0e0;
+    border-radius: 1.5rem;
+    transition: all 0.2s ease;
+    background: white;
+}
+.grid-card-option:hover {
+    border-color: #42a5f5;
+    transform: scale(1.03);
+    box-shadow: 0 10px 20px rgba(66, 165, 245, 0.2);
+}
+
+/* ========================================================================== */
+/* 4. PÁGINAS DE RESULTADO DA QUESTÃO (ACERTO / ERRO)                          */
+/* ========================================================================== */
+.bg-correct-screen {
+    background-color: #00a843;
+}
+
+.bg-wrong-screen {
+    background-color: #fbc02d;
+}
