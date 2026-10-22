@@ -173,7 +173,7 @@ const QuestionBank = {
         {
             id: 'm1',
             text: 'Bata palmas junto com a palavra BO-LA. Quantos pedacinhos ela tem?',
-            visualImage: 'https://placehold.co/220x120/f1f5f9/333333?text=Palavra+BOLA', // <-- CAMINHO DA IMAGEM
+            visualImage: 'assets/img/bola.png',
             type: 'horizontal-numbers',
             options: [
                 { label: '1', isCorrect: false },
@@ -188,17 +188,17 @@ const QuestionBank = {
             options: [
                 { 
                     label: 'Galinha', 
-                    image: 'https://placehold.co/120x120/e2e8f0/333333?text=Galinha', // <-- CAMINHO DA IMAGEM
+                    image: 'assets/img/galinha.png',
                     isCorrect: true 
                 },
                 { 
                     label: 'Pato', 
-                    image: 'https://placehold.co/120x120/e2e8f0/333333?text=Pato', // <-- CAMINHO DA IMAGEM
+                    image: 'assets/img/pato.png',
                     isCorrect: false 
                 },
                 { 
                     label: 'Sapo', 
-                    image: 'https://placehold.co/120x120/e2e8f0/333333?text=Sapo', // <-- CAMINHO DA IMAGEM
+                    image: 'assets/img/sapo.png',
                     isCorrect: false 
                 }
             ]
@@ -206,7 +206,7 @@ const QuestionBank = {
         {
             id: 'm3',
             text: 'A criança está NA FRENTE ou ATRÁS da árvore?',
-            visualImage: 'https://placehold.co/280x160/f1f5f9/333333?text=Crianca+atras+da+arvore', // <-- CAMINHO DA IMAGEM
+            visualImage: 'assets/img/crianca arvore.png',
             type: 'vertical-buttons',
             options: [
                 { label: 'NA FRENTE', isCorrect: false },
@@ -216,7 +216,7 @@ const QuestionBank = {
         {
             id: 'm4',
             text: 'Se você tem uma maçã e ganha mais uma, com quantas você fica?',
-            visualImage: 'https://placehold.co/260x100/f1f5f9/333333?text=1+Maca+%2B+1+Maca', // <-- CAMINHO DA IMAGEM
+            visualImage: 'assets/img/macas.png',
             type: 'horizontal-numbers',
             options: [
                 { label: '1', isCorrect: false },
@@ -226,29 +226,29 @@ const QuestionBank = {
         },
         {
             id: 'm5',
-            text: 'Qual número está faltando?',
-            visualImage: 'https://placehold.co/280x100/f1f5f9/333333?text=Potes+1%2C+2%2C+_%2C+4%2C+5', // <-- CAMINHO DA IMAGEM
-            type: 'horizontal-numbers',
-            options: [
-                { label: '1', isCorrect: false },
-                { label: '3', isCorrect: true },
-                { label: '5', isCorrect: false }
+                       text: 'Qual número está faltando?',
+                       visualImage: 'assets/img/numeros.png',
+                       type: 'horizontal-numbers',
+                       options: [
+                           { label: '1', isCorrect: false },
+                           { label: '3', isCorrect: true },
+                           { label: '5', isCorrect: false }
             ]
         },
         {
             id: 'm6',
             text: 'Encontre o animal que é DIFERENTE.',
-            visualImage: 'https://placehold.co/300x120/f1f5f9/333333?text=4+Cachorros+e+1+Gato', // <-- CAMINHO DA IMAGEM
+            visualImage: 'assets/img/cachorrogato.png',
             type: 'vertical-buttons',
             options: [
                 { 
                     label: 'CACHORRO', 
-                    image: 'https://placehold.co/100x100/e2e8f0/333333?text=Cachorro', // <-- CAMINHO DA IMAGEM
+                    image: 'assets/img/cachorro.png',
                     isCorrect: false 
                 },
                 { 
                     label: 'GATO', 
-                    image: 'https://placehold.co/100x100/e2e8f0/333333?text=Gato', // <-- CAMINHO DA IMAGEM
+                    image: 'assets/img/gato.png',
                     isCorrect: true 
                 }
             ]
@@ -256,27 +256,27 @@ const QuestionBank = {
         {
             id: 'm7',
             text: 'Qual é a próxima cor dessa sequência?',
-            visualImage: 'https://placehold.co/320x100/f1f5f9/333333?text=Vermelho+Azul+Vermelho+Azul+%3F', // <-- CAMINHO DA IMAGEM
+            visualImage: 'assets/img/vermelho azul.png',
             type: 'grid-2x2',
             options: [
                 { 
                     label: 'Vermelho', 
-                    image: 'https://placehold.co/100x100/ef4444/ffffff?text=Vermelho', // <-- CAMINHO DA IMAGEM
+                    image: 'https://placehold.co/100x100/ef4444/ffffff?text=Vermelho',
                     isCorrect: true 
                 },
                 { 
                     label: 'Azul', 
-                    image: 'https://placehold.co/100x100/3b82f6/ffffff?text=Azul', // <-- CAMINHO DA IMAGEM
+                    image: 'https://placehold.co/100x100/3b82f6/ffffff?text=Azul',
                     isCorrect: false 
                 },
                 { 
                     label: 'Roxo', 
-                    image: 'https://placehold.co/100x100/a855f7/ffffff?text=Roxo', // <-- CAMINHO DA IMAGEM
+                    image: 'https://placehold.co/100x100/a855f7/ffffff?text=Roxo',
                     isCorrect: false 
                 },
                 { 
                     label: 'Laranja', 
-                    image: 'https://placehold.co/100x100/f97316/ffffff?text=Laranja', // <-- CAMINHO DA IMAGEM
+                    image: 'https://placehold.co/100x100/f97316/ffffff?text=Laranja',
                     isCorrect: false 
                 }
             ]
