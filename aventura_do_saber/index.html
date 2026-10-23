@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -6,257 +7,323 @@
     <title>Aventura do Saber - Jogo Educacional Infantil</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Fontes Google para Tipografia Infantil e Amigável -->
+    <!-- Fontes Google -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
-    
+
     <!-- Estilos personalizados -->
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body class="min-h-screen w-full flex items-center justify-center p-2 sm:p-4 select-none">
 
-    <!-- CONTAINER PRINCIPAL DO JOGO -->
-    <main id="app-container" class="w-full max-w-4xl min-h-[620px] flex items-center justify-center relative rounded-3xl overflow-hidden transition-all duration-300">
-        
-        <!-- ========================================================================== -->
-        <!-- SEÇÃO 1: PÁGINAS DE COMEÇO E FIM (FUNDO ALARANJADO)                       -->
-        <!-- ========================================================================== -->
+<!-- CONTAINER PRINCIPAL DO JOGO -->
+<main id="app-container" class="w-full max-w-4xl min-h-[620px] flex items-center justify-center relative rounded-3xl overflow-hidden transition-all duration-300">
 
-        <!-- TELA 1A: INÍCIO / CADASTRO -->
-        <section id="screen-welcome" class="w-full h-full min-h-[620px] bg-orange-warm flex flex-col items-center justify-center p-6 relative">
-            <div class="game-card w-full max-w-md p-8 flex flex-col items-center text-center shadow-2xl relative z-10">
+    <!-- SEÇÃO 1: PÁGINAS DE COMEÇO E FIM -->
+    <!-- TELA INICIAL / CADASTRO -->
+    <section id="screen-welcome" class="w-full h-full min-h-[620px] bg-orange-warm flex flex-col items-center justify-center p-6 relative">
+
+        <div class="game-card w-full max-w-md p-8 flex flex-col items-center text-center shadow-2xl relative z-10">
+            <!-- CABEÇALHO -->
+            <div class="flex items-center justify-center gap-3 mb-2">
+                <h1 class="text-2xl sm:text-3xl font-extrabold text-red-600 tracking-wide uppercase">
+                    AVENTURA DO SABER
+                </h1>
+                <img
+                        id="welcome-header-icon"
+                        src="assets/img/livros.png"
+                        alt="Livro da Sabedoria"
+                        class="w-10 h-10 object-contain bounce-anim"
+                >
+            </div>
+            <p class="text-xs sm:text-sm font-bold text-gray-500 mb-6 uppercase tracking-wider">
+                Já iremos começar, antes coloque:
+            </p>
+
+            <!-- FORMULÁRIO DE ENTRADA -->
+            <form
+                    id="welcome-form"
+                    class="w-full space-y-4 mb-2"
+                    onsubmit="event.preventDefault(); startGame();"
+            >
+            
+                <div>
+                    <input
+                            type="text"
+                            id="player-name"
+                            class="custom-input"
+                            placeholder="NOME"
+                            required
+                            autocomplete="off"
+                            pattern="[A-Za-zÀ-ÖØ-öø-ÿ ]+"
+                            title="Digite seu nome usando apenas letras e espaços."
+                            oninput="this.value = this.value.replace(/[^A-Za-zÀ-ÖØ-öø-ÿ ]/g, '')"
+                    >
+                </div>
                 
-                <!-- Cabeçalho com Ícone e Título -->
-                <div class="flex items-center justify-center gap-3 mb-2">
-                    <h1 class="text-2xl sm:text-3xl font-extrabold text-red-600 tracking-wide uppercase">
-                        AVENTURA DO SABER
-                    </h1>
-                    <!-- IMAGEM DO CABEÇALHO (LIVRO/LÂMPADA) -->
-                    <img id="welcome-header-icon" 
-                         src="https://placehold.co/50x50/e53935/ffffff?text=Livro" 
-                         alt="Livro da Sabedoria" 
-                         class="w-10 h-10 object-contain bounce-anim">
-                         <!-- CAMINHO DA IMAGEM: Substitua a URL acima por ex: 'imagens/livro.png' -->
+                <div>
+                    <input
+                            type="text"
+                            id="player-school"
+                            class="custom-input"
+                            placeholder="SUA ESCOLA"
+                            required
+                            autocomplete="off"
+                    >
+                </div>
+                
+                <div>
+                    <input
+                            type="number"
+                            id="player-age"
+                            class="custom-input"
+                            placeholder="SUA IDADE"
+                            required
+                            autocomplete="off"
+                            min="1"
+                            max="120"
+                            step="1"
+                            oninput="if (this.value !== '') this.value = this.value.replace(/[^0-9]/g, '')"
+                    >
                 </div>
 
-                <p class="text-xs sm:text-sm font-bold text-gray-500 mb-6 uppercase tracking-wider">
-                    Já iremos começar, antes coloque:
-                </p>
-
-                <!-- Formulário de Entrada -->
-                <form id="welcome-form" class="w-full space-y-4 mb-2" onsubmit="event.preventDefault(); startGame();">
-                    <div>
-                        <input type="text" id="player-name" class="custom-input" placeholder="NOME" required autocomplete="off">
-                    </div>
-                    <div>
-                        <input type="text" id="player-school" class="custom-input" placeholder="SUA ESCOLA" required autocomplete="off">
-                    </div>
-                    <div>
-                        <input type="text" id="player-age" class="custom-input" placeholder="SUA IDADE" required autocomplete="off">
-                    </div>
-
-                    <button type="submit" class="w-full btn-red-pill py-3 rounded-full text-lg font-extrabold tracking-wider mt-4 uppercase">
-                        JOGAR
-                    </button>
-                </form>
-            </div>
-        </section>
-
-        <!-- TELA 1B: CONCLUSÃO DO NÍVEL / PARABÉNS -->
-        <section id="screen-finish" class="hidden w-full h-full min-h-[620px] bg-orange-warm flex flex-col items-center justify-center p-6">
-            <div class="bg-white rounded-3xl p-8 w-full max-w-sm flex flex-col items-center text-center shadow-2xl relative">
-                
-                <!-- IMAGEM DE TROFÉU / FESTA DA CONCLUSÃO -->
-                <img id="finish-icon" 
-                     src="https://placehold.co/80x80/ffb300/ffffff?text=Trofeu" 
-                     alt="Troféu de Parabéns" 
-                     class="w-20 h-20 object-contain mb-3 bounce-anim">
-                     <!-- CAMINHO DA IMAGEM: Substitua a URL acima por ex: 'imagens/trofeu.png' -->
-
-                <h2 class="text-3xl font-extrabold text-gray-800 mb-1">Parabéns!</h2>
-                <p class="text-sm font-bold text-gray-500 uppercase tracking-wider mb-3">
-                    VOCÊ TERMINOU!
-                </p>
-
-                <!-- DISPLAY DE PONTUAÇÃO -->
-                <p id="final-score-display" class="text-xl font-extrabold text-blue-600 mb-6 bg-blue-50 px-5 py-3 rounded-xl border border-blue-100 shadow-inner w-full">
-                    Você acertou 0 de 0!
-                </p>
-
-                <button onclick="showLevelSelection()" class="w-full btn-red-pill font-extrabold py-3 px-6 rounded-full uppercase tracking-wider">
-                    TROCAR DE NÍVEL
+                <button
+                        type="submit"
+                        class="w-full btn-red-pill py-3 rounded-full text-lg font-extrabold tracking-wider mt-4 uppercase"
+                >
+                    JOGAR
                 </button>
-            </div>
-        </section>
 
+            </form>
+        </div>
+    </section>
 
-        <!-- ========================================================================== -->
-        <!-- SEÇÃO 2: PÁGINAS INTERMEDIÁRIAS (FUNDO CLARO / PASTEL)                      -->
-        <!-- ========================================================================== -->
+    <!-- TELA DE CONCLUSÃO -->
+    <section id="screen-finish" class="hidden w-full h-full min-h-[620px] bg-orange-warm flex flex-col items-center justify-center p-6">
 
-        <!-- TELA 2A: ESCOLHA DO NÍVEL -->
-        <section id="screen-levels" class="hidden w-full h-full min-h-[620px] bg-pastel-clear flex flex-col items-center justify-center p-6">
-            <div class="game-card w-full max-w-2xl p-8 flex flex-col items-center text-center">
-                
-                <h2 class="text-3xl font-extrabold text-blue-600 mb-8">
-                    Escolha o nível
-                </h2>
+        <div class="bg-white rounded-3xl p-8 w-full max-w-sm flex flex-col items-center text-center shadow-2xl relative">
 
-                <!-- Cards de Nível -->
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full mb-2">
-                    
-                    <!-- Nível Fácil -->
-                    <div onclick="selectLevel('facil')" class="bg-white border-2 border-gray-100 rounded-2xl p-5 flex flex-col items-center cursor-pointer hover:shadow-xl transition-all hover:-translate-y-1">
-                        <button class="w-full btn-blue-level text-white py-2 rounded-xl font-bold uppercase mb-3 text-sm tracking-wider">
-                            FÁCIL
-                        </button>
-                        <!-- Imagens das Estrelas do Nível -->
-                        <div class="flex items-center gap-1 mb-2">
-                            <!-- CAMINHO DA IMAGEM: Substitua o src pelo caminho da sua imagem (Ex: estrela preenchida) -->
-                            <img src="https://placehold.co/24x24/f59e0b/ffffff?text=Imagem" alt="Estrela" class="w-6 h-6">
-                            <!-- CAMINHO DA IMAGEM: Substitua o src pelo caminho da sua imagem (Ex: estrela vazia) -->
-                            <img src="https://placehold.co/24x24/e2e8f0/94a3b8?text=Imagem" alt="Estrela Opaca" class="w-6 h-6 opacity-40">
-                            <!-- CAMINHO DA IMAGEM: Substitua o src pelo caminho da sua imagem (Ex: estrela vazia) -->
-                            <img src="https://placehold.co/24x24/e2e8f0/94a3b8?text=Imagem" alt="Estrela Opaca" class="w-6 h-6 opacity-40">
-                        </div>
-                        <p class="text-xs text-gray-500 font-semibold">
-                            Para quem está começando
-                        </p>
+            <img
+                    id="finish-icon"
+                    src="assets/img/trofeu.png"
+                    alt="Troféu de Parabéns"
+                    class="w-20 h-20 object-contain mb-3 bounce-anim"
+            >
+
+            <h2 class="text-3xl font-extrabold text-gray-800 mb-1">
+                Parabéns!
+            </h2>
+
+            <p class="text-sm font-bold text-gray-500 uppercase tracking-wider mb-3">
+                VOCÊ TERMINOU!
+            </p>
+
+            <p id="final-score-display" class="text-xl font-extrabold text-blue-600 mb-6 bg-blue-50 px-5 py-3 rounded-xl border border-blue-100 shadow-inner w-full">
+                Você acertou 0 de 0!
+            </p>
+
+            <button
+                    onclick="showLevelSelection()"
+                    class="w-full btn-red-pill font-extrabold py-3 px-6 rounded-full uppercase tracking-wider"
+            >
+                TROCAR DE NÍVEL
+            </button>
+
+        </div>
+    </section>
+
+    <!-- SEÇÃO 2: PÁGINAS INTERMEDIÁRIAS -->
+
+    <!-- TELA DE ESCOLHA DO NÍVEL -->
+    <section id="screen-levels" class="hidden w-full h-full min-h-[620px] bg-pastel-clear flex flex-col items-center justify-center p-6">
+
+        <div class="game-card w-full max-w-2xl p-8 flex flex-col items-center text-center">
+
+            <h2 class="text-3xl font-extrabold text-blue-600 mb-8">
+                Escolha o nível
+            </h2>
+
+            <!-- CARDS DE NÍVEL -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full mb-2">
+
+                <!-- NÍVEL FÁCIL -->
+                <div onclick="selectLevel('facil')" class="bg-white border-2 border-gray-100 rounded-2xl p-5 flex flex-col items-center cursor-pointer hover:shadow-xl transition-all hover:-translate-y-1">
+
+                    <button class="w-full btn-blue-level text-white py-2 rounded-xl font-bold uppercase mb-3 text-sm tracking-wider">
+                        FÁCIL
+                    </button>
+
+                    <div class="flex items-center gap-1 mb-2">
+                        <img src="assets/img/estrelacheia.png" alt="Estrela" class="w-6 h-6">
+                        <img src="assets/img/estrelavazia.png" alt="Estrela Opaca" class="w-6 h-6 opacity-40">
+                        <img src="assets/img/estrelavazia.png" alt="Estrela Opaca" class="w-6 h-6 opacity-40">
                     </div>
 
-                    <!-- Nível Médio -->
-                    <div onclick="selectLevel('medio')" class="bg-white border-2 border-gray-100 rounded-2xl p-5 flex flex-col items-center cursor-pointer hover:shadow-xl transition-all hover:-translate-y-1">
-                        <button class="w-full btn-yellow-level font-bold py-2 rounded-xl uppercase mb-3 text-sm tracking-wider">
-                            MÉDIO
-                        </button>
-                        <div class="flex items-center gap-1 mb-2">
-                            <!-- CAMINHO DA IMAGEM: Substitua o src pelo caminho da sua imagem (Ex: estrela preenchida) -->
-                            <img src="https://placehold.co/24x24/f59e0b/ffffff?text=Imagem" alt="Estrela" class="w-6 h-6">
-                            <img src="https://placehold.co/24x24/f59e0b/ffffff?text=Imagem" alt="Estrela" class="w-6 h-6">
-                            <!-- CAMINHO DA IMAGEM: Substitua o src pelo caminho da sua imagem (Ex: estrela vazia) -->
-                            <img src="https://placehold.co/24x24/e2e8f0/94a3b8?text=Imagem" alt="Estrela Opaca" class="w-6 h-6 opacity-40">
-                        </div>
-                        <p class="text-xs text-gray-500 font-semibold">
-                            Para quem já sabe bastante
-                        </p>
-                    </div>
-
-                    <!-- Nível Difícil -->
-                    <div onclick="selectLevel('dificil')" class="bg-white border-2 border-gray-100 rounded-2xl p-5 flex flex-col items-center cursor-pointer hover:shadow-xl transition-all hover:-translate-y-1">
-                        <button class="w-full btn-purple-level text-white py-2 rounded-xl font-bold uppercase mb-3 text-sm tracking-wider">
-                            DIFÍCIL
-                        </button>
-                        <div class="flex items-center gap-1 mb-2">
-                            <!-- CAMINHO DA IMAGEM: Substitua o src pelo caminho da sua imagem (Ex: estrela preenchida) -->
-                            <img src="https://placehold.co/24x24/f59e0b/ffffff?text=Imagem" alt="Estrela" class="w-6 h-6">
-                            <img src="https://placehold.co/24x24/f59e0b/ffffff?text=Imagem" alt="Estrela" class="w-6 h-6">
-                            <img src="https://placehold.co/24x24/f59e0b/ffffff?text=Imagem" alt="Estrela" class="w-6 h-6">
-                        </div>
-                        <p class="text-xs text-gray-500 font-semibold">
-                            Para os mestres do conhecimento
-                        </p>
-                    </div>
-
+                    <p class="text-xs text-gray-500 font-semibold">
+                        Para quem está começando
+                    </p>
                 </div>
-            </div>
-        </section>
 
-        <!-- TELA 2B: PERGUNTA / QUESTÃO DO JOGO -->
-        <section id="screen-game" class="hidden w-full h-full min-h-[620px] bg-pastel-clear flex flex-col items-center justify-center p-4 sm:p-6">
-            <div class="game-card w-full max-w-xl p-6 sm:p-8 flex flex-col items-center text-center relative">
-                
-                <!-- Barra Superior do Card -->
-                <div class="w-full flex items-center justify-between mb-4 border-b border-gray-100 pb-3">
+                <!-- NÍVEL MÉDIO -->
+                <div onclick="selectLevel('medio')" class="bg-white border-2 border-gray-100 rounded-2xl p-5 flex flex-col items-center cursor-pointer hover:shadow-xl transition-all hover:-translate-y-1">
+
+                    <button class="w-full btn-yellow-level font-bold py-2 rounded-xl uppercase mb-3 text-sm tracking-wider">
+                        MÉDIO
+                    </button>
+
+                    <div class="flex items-center gap-1 mb-2">
+                        <img src="assets/img/estrelacheia.png" alt="Estrela" class="w-6 h-6">
+                        <img src="assets/img/estrelacheia.png" alt="Estrela" class="w-6 h-6">
+                        <img src="assets/img/estrelavazia.png" alt="Estrela Opaca" class="w-6 h-6 opacity-40">
+                    </div>
+
+                    <p class="text-xs text-gray-500 font-semibold">
+                        Para quem já sabe bastante
+                    </p>
+                </div>
+
+                <!-- NÍVEL DIFÍCIL -->
+                <div onclick="selectLevel('dificil')" class="bg-white border-2 border-gray-100 rounded-2xl p-5 flex flex-col items-center cursor-pointer hover:shadow-xl transition-all hover:-translate-y-1">
+
+                    <button class="w-full btn-purple-level text-white py-2 rounded-xl font-bold uppercase mb-3 text-sm tracking-wider">
+                        DIFÍCIL
+                    </button>
+
+                    <div class="flex items-center gap-1 mb-2">
+                        <img src="assets/img/estrelacheia.png" alt="Estrela" class="w-6 h-6">
+                        <img src="assets/img/estrelacheia.png" alt="Estrela" class="w-6 h-6">
+                        <img src="assets/img/estrelacheia.png" alt="Estrela" class="w-6 h-6">
+                    </div>
+
+                    <p class="text-xs text-gray-500 font-semibold">
+                        Para os mestres do conhecimento
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- TELA DE PERGUNTAS DO JOGO -->
+    <section id="screen-game" class="hidden w-full h-full min-h-[620px] bg-pastel-clear flex flex-col items-center justify-center p-4 sm:p-6">
+
+        <div class="game-card w-full max-w-xl p-6 sm:p-8 flex flex-col items-center text-center relative">
+
+            <div class="w-full flex items-center justify-between mb-4 border-b border-gray-100 pb-3">
+
                     <span id="game-player-info" class="text-xs font-bold text-gray-400 uppercase tracking-wider">
                         Jogador: ---
                     </span>
-                    <span id="game-level-badge" class="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full uppercase">
+
+                <span id="game-level-badge" class="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full uppercase">
                         Fácil
                     </span>
-                    <!-- Botão Ouvir Pergunta com Ícone de Som -->
-                    <button onclick="speakCurrentQuestion()" class="p-2 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors flex items-center gap-1" title="Ouvir Pergunta">
-                        <img src="https://placehold.co/20x20/2563eb/ffffff?text=Som" alt="Som" class="w-5 h-5">
-                    </button>
-                </div>
 
-                <!-- Pergunta Texto Principal -->
-                <h2 id="question-text" class="text-xl sm:text-2xl font-extrabold text-gray-800 mb-6">
-                    Carregando pergunta...
+                <button
+                        onclick="speakCurrentQuestion()"
+                        class="p-2 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors flex items-center gap-1"
+                        title="Ouvir Pergunta"
+                >
+                    <img src="assets/img/som.png" alt="Som" class="w-5 h-5">
+                </button>
+
+            </div>
+
+            <!-- PERGUNTA PRINCIPAL -->
+            <h2 id="question-text" class="text-xl sm:text-2xl font-extrabold text-gray-800 mb-6">
+                Carregando pergunta...
+            </h2>
+
+            <!-- CONTAINER DE IMAGENS E ILUSTRAÇÕES -->
+            <div id="question-visual-container" class="w-full mb-6 flex justify-center items-center">
+                <!-- Conteúdo dinâmico injetado pelo JavaScript -->
+            </div>
+
+            <!-- OPÇÕES DE RESPOSTA -->
+            <div id="answers-container" class="w-full">
+                <!-- Opções renderizadas pelo JavaScript -->
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SEÇÃO 3: RESULTADO DAS QUESTÕES -->
+
+    <!-- TELA DE ACERTO -->
+    <section id="screen-correct" class="hidden w-full h-full min-h-[620px] bg-correct-screen flex flex-col items-center justify-center p-6">
+
+        <div class="bg-white rounded-3xl p-8 w-full max-w-sm flex flex-col items-center text-center shadow-2xl">
+
+            <div class="flex items-center gap-3 mb-2">
+
+                <h2 class="text-3xl font-extrabold text-gray-800">
+                    Muito Bem!
                 </h2>
 
-                <!-- Container Visuais Extras (Mídias/Ilustrações de apoio) -->
-                <div id="question-visual-container" class="w-full mb-6 flex justify-center items-center">
-                    <!-- Conteúdo dinâmico de imagem injetado pelo JavaScript -->
-                </div>
-
-                <!-- Container Dinâmico de Opções de Resposta -->
-                <div id="answers-container" class="w-full">
-                    <!-- Opções dinâmicas renderizadas em tempo de execução -->
-                </div>
+                <img
+                        id="correct-check-icon"
+                        src="assets/img/palmas.png"
+                        alt="Acerto"
+                        class="w-10 h-10 object-contain"
+                >
 
             </div>
-        </section>
 
+            <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-6">
+                VOCÊ ACERTOU!
+            </p>
 
-        <!-- ========================================================================== -->
-        <!-- SEÇÃO 3: PÁGINAS DE RESULTADO DA QUESTÃO (ACERTO OU ERRO)                   -->
-        <!-- ========================================================================== -->
+            <button
+                    onclick="nextQuestion()"
+                    class="w-full bg-green-600 hover:bg-green-700 text-white font-extrabold py-3 px-6 rounded-full uppercase tracking-wider transition-all shadow-md"
+            >
+                PRÓXIMA ➔
+            </button>
 
-        <!-- TELA 3A: RESULTADO ACERTO (VERDE) -->
-        <section id="screen-correct" class="hidden w-full h-full min-h-[620px] bg-correct-screen flex flex-col items-center justify-center p-6">
-            <div class="bg-white rounded-3xl p-8 w-full max-w-sm flex flex-col items-center text-center shadow-2xl">
-                
-                <div class="flex items-center gap-3 mb-2">
-                    <h2 class="text-3xl font-extrabold text-gray-800">Muito Bem!</h2>
-                    <!-- IMAGEM DE CHECK DE ACERTO -->
-                    <!-- CAMINHO DA IMAGEM: Substitua a URL abaixo pelo caminho da sua imagem de acerto (ex: 'imagens/check_verde.png') -->
-                    <img id="correct-check-icon" 
-                         src="https://placehold.co/40x40/00a843/ffffff?text=Imagem" 
-                         alt="Acerto" 
-                         class="w-10 h-10 object-contain">
-                </div>
+        </div>
+    </section>
 
-                <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-6">
-                    VOCÊ ACERTOU!
-                </p>
+    <!-- TELA DE ERRO -->
+    <section id="screen-wrong" class="hidden w-full h-full min-h-[620px] bg-wrong-screen flex flex-col items-center justify-center p-6">
 
-                <button onclick="nextQuestion()" class="w-full bg-green-600 hover:bg-green-700 text-white font-extrabold py-3 px-6 rounded-full uppercase tracking-wider transition-all shadow-md">
-                    PRÓXIMA ➔
-                </button>
+        <div class="bg-white rounded-3xl p-8 w-full max-w-sm flex flex-col items-center text-center shadow-2xl">
+
+            <div class="flex items-center gap-3 mb-2">
+
+                <h2 class="text-3xl font-extrabold text-gray-800">
+                    Quase!
+                </h2>
+
+                <img
+                        id="wrong-retry-icon"
+                        src="assets/img/quase.png"
+                        alt="Ops"
+                        class="w-10 h-10 object-contain"
+                >
+
             </div>
-        </section>
 
-        <!-- TELA 3B: RESULTADO ERRO (AMARELO) -->
-        <section id="screen-wrong" class="hidden w-full h-full min-h-[620px] bg-wrong-screen flex flex-col items-center justify-center p-6">
-            <div class="bg-white rounded-3xl p-8 w-full max-w-sm flex flex-col items-center text-center shadow-2xl">
-                
-                <div class="flex items-center gap-3 mb-2">
-                    <h2 class="text-3xl font-extrabold text-gray-800">Quase!</h2>
-                    <!-- IMAGEM DE TENTAR NOVAMENTE -->
-                    <!-- CAMINHO DA IMAGEM: Substitua a URL abaixo pelo caminho da sua imagem de erro (ex: 'imagens/erro_alerta.png') -->
-                    <img id="wrong-retry-icon" 
-                         src="https://placehold.co/40x40/fbc02d/ffffff?text=Imagem" 
-                         alt="Ops" 
-                         class="w-10 h-10 object-contain">
-                </div>
+            <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-6">
+                VAMOS PARA A PRÓXIMA
+            </p>
 
-                <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-6">
-                    VAMOS PARA A PRÓXIMA
-                </p>
+            <button
+                    onclick="nextQuestion()"
+                    class="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-extrabold py-3 px-6 rounded-full uppercase tracking-wider transition-all shadow-md"
+            >
+                PRÓXIMA ➔
+            </button>
 
-                <button onclick="nextQuestion()" class="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-extrabold py-3 px-6 rounded-full uppercase tracking-wider transition-all shadow-md">
-                    PRÓXIMA ➔
-                </button>
-            </div>
-        </section>
+        </div>
+    </section>
 
-    </main>
+</main>
 
-    <!-- ========================================================================== -->
-    <!-- SCRIPTS (a ordem importa: o banco de perguntas deve vir antes da lógica)   -->
-    <!-- ========================================================================== -->
-    <script src="assets/js/banco-perguntas.js"></script>
-    <script src="assets/js/app.js"></script>
+<!-- ARQUIVOS JAVASCRIPT DO JOGO -->
+<script src="assets/js/banco-perguntas.js"></script>
+<script src="assets/js/app.js"></script>
+
 </body>
 </html>
