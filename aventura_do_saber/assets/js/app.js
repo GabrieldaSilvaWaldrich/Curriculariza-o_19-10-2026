@@ -34,12 +34,12 @@ function shuffleArray(array) {
 }
 
 /**
- * 2. BANCO DE PERGUNTAS
+ * 2. Banco de perguntas
  * Movido para assets/js/banco-perguntas.js (carregado antes deste arquivo).
  */
 
 /**
- * 3. GERENCIADOR DE ROTAS / NAVEGAÇÃO ENTRE TELAS
+ * 3. gerenciador de rotas / Navegaçao entre telas
  */
 function showScreen(screenId) {
     const screens = ['screen-welcome', 'screen-levels', 'screen-game', 'screen-correct', 'screen-wrong', 'screen-finish'];
@@ -100,7 +100,6 @@ function selectLevel(levelKey) {
 function loadQuestion() {
     const levelQuestions = AppState.currentQuestions;
     
-    // Se as perguntas do nível acabaram, vai para a tela de Conclusão (Fundo Alaranjado)
     if (!levelQuestions || AppState.questionIndex >= levelQuestions.length) {
         const scoreDisplay = document.getElementById('final-score-display');
         if (scoreDisplay) {
@@ -117,22 +116,18 @@ function loadQuestion() {
     showScreen('screen-game');
     AppState.selectedSyllables = [];
 
-    // Atualizar cabeçalhos
     const playerInfo = document.getElementById('game-player-info');
     if (playerInfo) playerInfo.innerText = `Jogador: ${AppState.player.name || 'Jogador'}`;
     
     const badge = document.getElementById('game-level-badge');
     if (badge) badge.innerText = AppState.currentLevel.toUpperCase();
 
-    // Texto da Pergunta
     const questionText = document.getElementById('question-text');
     if (questionText) questionText.innerText = currentQ.text || '';
 
-    // Renderizar Mídias Visuais e Opções
     renderVisualContainer(currentQ);
     renderAnswersContainer(currentQ);
 
-    // Fala inicial
     speakCurrentQuestion();
 }
 
@@ -161,44 +156,33 @@ function speakText(text) {
     }
 }
 
-/**
- * 4.5. FUNÇÃO PARA TOCAR ARQUIVOS DE ÁUDIO REAIS (.MP3, .WAV)
- */
 function playAudioFile(path) {
-    // Cancela qualquer narração de voz que esteja tocando no momento para não encavalar os áudios
     if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
     }
 
-    // Verifica se o caminho ainda é o texto de exemplo provisório
     if (!path || path.includes('caminho/para/seu/audio')) {
-        speakText('au au!'); // Fallback temporário: Fala sintética APENAS enquanto você não coloca o arquivo real
+        speakText('au au!');
         console.warn("Áudio real não configurado. Usando voz sintética temporária.");
         return;
     }
     
-    // Toca EXCLUSIVAMENTE o seu arquivo de áudio real (.mp3 / .wav)
     const audio = new Audio(path);
     audio.play().catch(e => console.error("Erro ao tentar tocar o áudio:", e));
 }
 
-/**
- * 5. RENDERIZAÇÃO DE ELEMENTOS VISUAIS E OPÇÕES COM IMAGENS
- */
 function renderVisualContainer(q) {
     const container = document.getElementById('question-visual-container');
     container.innerHTML = '';
 
-    // Botão especial de Som de Animal se houver áudio especial
     if (q.id === 'f1') {
         container.innerHTML = `
             <button onclick="playAudioFile('${q.audioFile}')" class="btn-red-pill px-6 py-2.5 rounded-full font-bold text-sm tracking-wider flex items-center gap-2">
-                <img src="https://placehold.co/20x20/ffffff/e53935?text=Som" alt="Som" class="w-5 h-5">
+                <img src="assets/img/som.png" alt="Som" class="w-5 h-5">
                 <span>OUVIR SOM</span>
             </button>
         `;
     } 
-    // Imagem de apoio visual geral
     else if (q.visualImage) {
         container.innerHTML = `
             <div class="p-2 bg-gray-50 rounded-2xl border border-gray-200">
@@ -212,7 +196,6 @@ function renderAnswersContainer(q) {
     const container = document.getElementById('answers-container');
     container.innerHTML = '';
 
-    // TIPO 1: Botões Verticais Vermelhos Pílula
     if (q.type === 'vertical-buttons') {
         const wrapper = document.createElement('div');
         wrapper.className = 'flex flex-col gap-3 w-full max-w-xs mx-auto';
@@ -234,7 +217,6 @@ function renderAnswersContainer(q) {
         container.appendChild(wrapper);
     }
 
-    // TIPO 2: Grade 2x2 com Imagens
     else if (q.type === 'grid-2x2') {
         const wrapper = document.createElement('div');
         wrapper.className = 'grid grid-cols-2 gap-4 w-full max-w-sm mx-auto';
@@ -256,7 +238,6 @@ function renderAnswersContainer(q) {
         container.appendChild(wrapper);
     }
 
-    // TIPO 3: Números Horizontais (1, 2, 3)
     else if (q.type === 'horizontal-numbers') {
         const wrapper = document.createElement('div');
         wrapper.className = 'flex justify-center gap-4 w-full';
@@ -272,7 +253,6 @@ function renderAnswersContainer(q) {
         container.appendChild(wrapper);
     }
 
-    // TIPO 4: Montador de Sílabas ("BO" + "LA")
     else if (q.type === 'syllable-builder') {
         const wrapper = document.createElement('div');
         wrapper.className = 'flex flex-col items-center gap-4 w-full';
@@ -299,9 +279,6 @@ function renderAnswersContainer(q) {
     }
 }
 
-/**
- * 6. LÓGICA DE RESPOSTAS E FEEDBACK
- */
 function handleSyllableClick(syl, q) {
     AppState.selectedSyllables.push(syl);
     const display = document.getElementById('syllable-display');
@@ -338,7 +315,6 @@ function retryQuestion() {
     loadQuestion();
 }
 
-// Inicializador ao carregar a página
 window.onload = function() {
     showScreen('screen-welcome');
 };
